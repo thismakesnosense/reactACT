@@ -43,6 +43,22 @@ class EmployeeTable extends React.Component{
     sortBy(event){
        let sortEmp = event.target.value
        console.log(sortEmp);
+       let sorting = this.filteredEmployees.sort(this.compare)
+    }
+
+    compare(a, b){
+        let nameA = a.name.first.toLowerCase();
+        let nameB = b.name.first.toLowerCase();
+        let comapareSame = 0;
+        if (nameA > nameB){
+            comapareSame = 1;
+        }
+        else if (nameB > nameA){
+            comapareSame = -1;
+        }
+
+        return  comapareSame;
+   
     }
     
 
