@@ -41,12 +41,16 @@ class EmployeeTable extends React.Component{
     }
 
     sortBy(event){
-       let sortEmp = event.target.value
+       let sortEmp = event.target.value + "Sort";
        console.log(sortEmp);
-       let sorting = this.filteredEmployees.sort(this.compare)
+       this.setState({
+        filteredEmployees: this.state.filteredEmployees.sort(this[sortEmp])
+       })
+       
+       
     }
 
-    compare(a, b){
+    nameSort(a, b){
         let nameA = a.name.first.toLowerCase();
         let nameB = b.name.first.toLowerCase();
         let comapareSame = 0;
@@ -60,13 +64,27 @@ class EmployeeTable extends React.Component{
         return  comapareSame;
    
     }
+
+    locationSort(a, b){
+        let nameA = a.location.city.toLowerCase();
+        let nameB = b.location.city.toLowerCase();
+        let comapareSame = 0;
+        if (nameA > nameB){
+            comapareSame = 1;
+        }
+        else if (nameB > nameA){
+            comapareSame = -1;
+        }
+
+        return  comapareSame;
+    }
     
 
     render(){
         return(<div>
             <input type="text" onChange={this.searchtab.bind(this)} />
             <select onChange={this.sortBy.bind(this)}>
-                <option disabled value="null">Sort By...</option>
+                <option disabled value="null" selected>Sort By...</option>
                 <option value="name">By name</option>
                 <option value="location">By location</option>
                 </select>
